@@ -22,7 +22,8 @@ Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])
     ->name('productos.edit');
 Route::put('/productos/{id}', [ProductoController::class, 'update'])
     ->name('productos.update');
-
+Route::delete('/productos/{id}', [ProductoController::class, 'destroy'])
+    ->name('productos.destroy');
 Route::middleware('auth')->group(function () {
 
     Route::get('/inicio', function () {

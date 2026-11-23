@@ -43,6 +43,18 @@
                     <a href="{{ route('productos.edit', $producto->id) }}">
                         Editar
                     </a>
+
+                    <form method="POST"
+                          action="{{ route('productos.destroy', $producto->id) }}"
+                          onsubmit="return confirm('¿Está seguro de eliminar este producto?');">
+
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit">
+                            Eliminar
+                        </button>
+                    </form>
                 </td>
             </tr>
         @empty
