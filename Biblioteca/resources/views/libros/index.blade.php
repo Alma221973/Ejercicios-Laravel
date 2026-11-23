@@ -4,7 +4,10 @@
 @section('contenido')
 
 <h1>Libros registrados</h1>
-<p><a href="{{ route('libros.create') }}">Crear libro</a></p>
+
+<p>
+    <a href="{{ route('libros.create') }}">Crear libro</a>
+</p>
 
 <table>
     <thead>
@@ -14,6 +17,7 @@
             <th>Título</th>
             <th>Autor</th>
             <th>Año de publicación</th>
+            <th>Acciones</th>
         </tr>
     </thead>
 
@@ -25,10 +29,16 @@
                 <td>{{ $libro->titulo }}</td>
                 <td>{{ $libro->autor }}</td>
                 <td>{{ $libro->anio_publicacion }}</td>
+
+                <td>
+                    <a href="{{ route('libros.edit', $libro->id) }}">
+                        Editar
+                    </a>
+                </td>
             </tr>
         @empty
             <tr>
-                <td colspan="5">No hay libros registrados.</td>
+                <td colspan="6">No hay libros registrados.</td>
             </tr>
         @endforelse
     </tbody>
