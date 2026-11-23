@@ -18,6 +18,10 @@ Route::get('/productos/create', [ProductoController::class, 'create'])
     ->name('productos.create');
 Route::post('/productos', [ProductoController::class, 'store'])
     ->name('productos.store');
+Route::get('/productos/{id}/edit', [ProductoController::class, 'edit'])
+    ->name('productos.edit');
+Route::put('/productos/{id}', [ProductoController::class, 'update'])
+    ->name('productos.update');
 
 Route::middleware('auth')->group(function () {
 

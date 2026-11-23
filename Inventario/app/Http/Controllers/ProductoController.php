@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use Illuminate\Validation\Rule;
 
 class ProductoController extends Controller
 {
@@ -40,5 +41,35 @@ class ProductoController extends Controller
 
         return redirect()->route('productos.index')
             ->with('success', 'Producto creado exitosamente.');
+    }
+
+    public function edit(int $id)
+    {
+        $producto = Producto::findOrFail($id);
+        return view('productos.edit', [
+            'producto' => $producto
+        ]);
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $producto = Producto::findOrFail($id);
+
+        $datos = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'precio' => 'required|numeric|min:0',
+            'cantidad' => 'required|integer|min:0',
+        ]);
+
+        $producto->nombre = $datos['nombre'];
+        $producto->descripcion = $datos['descripcion'];
+        $producto->precio = $datos['precio'];
+        $producto->cantidad = $datos['cantidad'];
+
+        $producto->save();
+
+        return redirect()->route('productos.index')
+            ->with('success', 'Producto actualizado exitosamente.');
     }
 }
