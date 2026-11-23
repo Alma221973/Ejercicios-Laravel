@@ -14,6 +14,11 @@ Route::get('/login', [LoginController::class, 'create'])
 Route::post('/login', [LoginController::class, 'store'])
     ->middleware('throttle:6,1')->name('login.store');
 
+Route::get('/productos/create', [ProductoController::class, 'create'])
+    ->name('productos.create');
+Route::post('/productos', [ProductoController::class, 'store'])
+    ->name('productos.store');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/inicio', function () {
